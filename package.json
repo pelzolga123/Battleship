@@ -1,0 +1,37 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "Classic Battleship game",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack -w",
+    "lint": "eslint",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pelzolga123/Battleship.git"
+  },
+  "keywords": [
+    "Battleship",
+    "game",
+    "JavaScript"
+  ],
+  "author": "Tunde Oretade & Olga Pelts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pelzolga123/Battleship/issues"
+  },
+  "homepage": "https://github.com/pelzolga123/Battleship#readme",
+  "devDependencies": {
+    "cli": "^1.0.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.9.0"
+  }
+}

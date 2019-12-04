@@ -1,0 +1,5 @@
+node_modules
+
+# ignore vscode files
+
+*.vscode
