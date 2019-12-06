@@ -1,0 +1,11 @@
+td{
+    width:40px;
+    height:40px;
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+}
+.first, .second{
+    background-color:green;
+    cursor: pointer;
+}
