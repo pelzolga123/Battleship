@@ -1,3 +1,5 @@
+/* gameBoard creates table with 100 td's, each td has it's own index from 00 to 99 */
+
 const gameBoard = () => {
   const mainDiv = document.getElementById('content');
   const table = document.createElement('table');

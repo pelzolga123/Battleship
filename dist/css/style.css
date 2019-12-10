@@ -5,7 +5,7 @@ td{
     font-weight: 900;
     text-align: center;
 }
-.first, .second{
+ .ships{
     background-color:green;
     cursor: pointer;
 }
