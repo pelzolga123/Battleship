@@ -25,6 +25,7 @@
   "homepage": "https://github.com/pelzolga123/Battleship#readme",
   "devDependencies": {
     "cli": "^1.0.1",
+    "terser-webpack-plugin": "^2.3.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
