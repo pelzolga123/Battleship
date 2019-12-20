@@ -1,4 +1,4 @@
-# Battleship
+
 
 <p align="center">
   <h1 align="center">BATTLESHIP</h1>
@@ -17,11 +17,11 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-- [Battleship](#battleship)
-  - [Table of Contents](#table-of-contents)
-  - [About The Project](#about-the-project)
-    - [Built With](#built-with)
-    - [Contact](#contact)
+
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+  - [Contact](#contact)
 
 
 <!-- ABOUT THE PROJECT -->
@@ -42,5 +42,5 @@ game was built in ES6 using test driven development with [Jest](https://jestjs.i
 
 ### Contact
 
-* **[Olga Pelts](https://github.com/pelzolga123) **
-* **[Tunde Oretade](https://github.com/tundeiness) **
+* **[Olga Pelts](https://github.com/pelzolga123)**
+* **[Tunde Oretade](https://github.com/tundeiness)**
