@@ -24,7 +24,6 @@ const Ships = (player, fc) => ({
     const { player } = this;
 
     while (k < decks) {
-
       player.matrix[x + k * kx][y + k * ky] = 1;
       this.matrix.push([x + k * kx, y + k * ky]);
       k += 1;
@@ -36,7 +35,8 @@ const Ships = (player, fc) => ({
       getElement('play').setAttribute('data-hidden', 'false');
     }
   },
-  getDeck(){
+
+  getDeck() {
     return this.deck;
   },
 

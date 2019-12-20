@@ -9,7 +9,7 @@ import {
 import { Ships } from './ships';
 import user from './user';
 
-const Board = (field) => ({
+const Board = field => ({
   shipSide: 33,
   shipsData: [
     '',

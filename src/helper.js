@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-nested-ternary */
 const createMatrix = () => {
@@ -11,9 +12,9 @@ const createMatrix = () => {
   return arr;
 };
 
-const getRandom = (n) => Math.floor(Math.random() * (n + 1));
+const getRandom = n => Math.floor(Math.random() * (n + 1));
 
-const getElement = (id) => document.getElementById(id);
+const getElement = id => document.getElementById(id);
 
 const getCoords = (el) => {
   const coords = el.getBoundingClientRect();
@@ -45,7 +46,9 @@ const showServiseText = (text) => {
 const transformCoordinates = (e, instance) => {
   if (!Math.trunc) {
     Math.trunc = function (v) {
+      // eslint-disable-next-line no-param-reassign
       v = +v;
+      // eslint-disable-next-line no-mixed-operators
       return (v - v % 1) || (!isFinite(v) || v === 0 ? v : v < 0 ? -0 : 0);
     };
   }
