@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import { Ships } from './ships';
 import {
   getElement,

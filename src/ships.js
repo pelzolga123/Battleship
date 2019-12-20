@@ -42,7 +42,6 @@ const Ships = (player, fc) => ({
   },
 
   showShip() {
-
     const div = document.createElement('div');
     const dir = (this.kx === 1) ? ' vertical' : '';
     const classname = this.shipname.slice(0, -1);
