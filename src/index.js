@@ -1,7 +1,18 @@
-import gameBoard from './board';
-import ship from './ship';
-import dragDrop from './dragDrop';
+/* eslint-disable no-tabs */
+import game from './game';
+/* shipSide	- размер палубы
+user.field 	- user gameboard
+comp.field 	- computer gameboard
+user.fieldX,
+user.fieldY	- coordinates of user gameboard
+comp.fieldX,
+comp.fieldY	- coordinates of computer gameboard
 
-gameBoard(); // generates new board
-ship(2, '1'); // creates new ship
-dragDrop(); // drag and drop, still working on it
+0 - empty space
+1 - ship deck
+2 - space near ship
+3 - already hit place
+4 - hit deck
+*/
+
+game();
