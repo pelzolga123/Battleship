@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { Board } from './board';
 import { getElement } from './helper';
 
