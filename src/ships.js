@@ -36,6 +36,9 @@ const Ships = (player, fc) => ({
       getElement('play').setAttribute('data-hidden', 'false');
     }
   },
+  getDeck(){
+    return this.deck;
+  },
 
   showShip() {
 
