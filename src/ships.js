@@ -1,4 +1,5 @@
 /* eslint-disable import/no-cycle */
+/* eslint-disable no-shadow */
 import { getElement, deleteElementMatrix } from './helper';
 import user from './user';
 
