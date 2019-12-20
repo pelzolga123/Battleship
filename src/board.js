@@ -51,9 +51,7 @@ const Board = (field) => ({
       }
     }
   },
-  // ship direction
-  // kx == 0 и ky == 1 — horizontal,
-  // kx == 1 и ky == 0 - vertical.
+
 
   getCoordinatesDecks(decks) {
     const kx = getRandom(1);
