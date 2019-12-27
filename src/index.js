@@ -12,7 +12,7 @@ const gameBoardCont = document.getElementById('game');
 // const player = document.getElementById('playerGrid');
 
 
-// make the grid columns and rows
+// make the grid columns and rows for gameboard
 for (let i = 0; i < cols; i += 1) {
   for (let j = 0; j < rows; j += 1) {
     // create a new div HTML element for each grid square and make it the right size
@@ -35,15 +35,12 @@ for (let i = 0; i < cols; i += 1) {
   }
 }
 
-
+// make the grid columns and rows for game
 for (let i = 0; i < cols; i += 1) {
   for (let j = 0; j < rows; j += 1) {
     // create a new div HTML element for each grid square and make it the right size
     const sqr = document.createElement('div');
     gameBoardCont.appendChild(sqr);
-
-    // computer.appendChild(square);
-    // player.appendChild(square);
 
     // give each div element a unique id based on its row and column, like "s00"
     sqr.id = `s${j}${i}`;
