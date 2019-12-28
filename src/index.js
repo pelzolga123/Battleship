@@ -71,16 +71,16 @@ let hitCount = 0;
    0 = empty, 1 = part of a ship, 2 = a sunken part of a ship, 3 = a missed shot
 */
 const gameBoard = [
-  [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 function fireTorpedo(e) {
@@ -124,3 +124,28 @@ gameBoardContainer.addEventListener('click', fireTorpedo, false);
 // player.addEventListener('click', fireTorpedo, false);
 
 // initial code via http://www.kirupa.com/html5/handling_events_for_many_elements.htm:
+const ships = {
+  ship1: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
+  ship2: [[2, 3], [3, 3], [4, 3], [5, 3]],
+  ship3: [[6, 5], [6, 6], [6, 7]],
+  ship4: [[8, 6], [8, 7]],
+  ship5: [[9, 9]],
+
+};
+
+function placeShip() {
+  let x;
+  let y;
+  Object.keys(ships).forEach((item) => {
+    for (let i = 0; i < ships[item].length; i += 1) {
+      const coord = ships[item][i];
+      for (let j = 0; j < coord.length; j += 1) {
+        x = coord[0];
+        y = coord[1];
+      }
+      gameBoard[x][y] = 1;
+    }
+  });
+  console.log(gameBoard);
+}
+placeShip();
