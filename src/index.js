@@ -1,3 +1,4 @@
+import randomInt from './randomGen';
 /* eslint-disable max-len */
 
 // set grid rows and columns and the size of each square
@@ -123,19 +124,43 @@ gameBoardContainer.addEventListener('click', fireTorpedo, false);
 // computer.addEventListener('click', fireTorpedo, false);
 // player.addEventListener('click', fireTorpedo, false);
 
-// initial code via http://www.kirupa.com/html5/handling_events_for_many_elements.htm:
+// initial code via
+// http://www.kirupa.com/html5/handling_events_for_many_elements.htm:
+
+const b = randomInt(0, 9);
+const d = randomInt(0, 9);
+const c = randomInt(0, 9);
+const t = randomInt(0, 9);
+const p = randomInt(0, 9);
+
+// const shipCover = () => ({
+//   ships: {
+//     battleShip: [[b, b], [b, b + 1], [b, b + 2], [b, b + 3], [b, b + 4]],
+//     destroyer: [[d + 1, d], [d + 2, d], [d + 3, d], [d + 4, d]],
+//     cruiser: [[c, c + 1], [c, c + 2], [c, c + 3]],
+//     patrolBoat: [[p, p + 1], [p, p + 2]],
+//     tug: [[t, t]],
+//   },
+// });
 const ships = {
-  ship1: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
-  ship2: [[2, 3], [3, 3], [4, 3], [5, 3]],
-  ship3: [[6, 5], [6, 6], [6, 7]],
-  ship4: [[8, 6], [8, 7]],
-  ship5: [[9, 9]],
+  // battleShip: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
+  // destroyer: [[2, 3], [3, 3], [4, 3], [5, 3]],
+  // cruiser: [[6, 5], [6, 6], [6, 7]],
+  // patrolBoat: [[8, 6], [8, 7]],
+  // tug: [[9, 9]],
+  battleShip: [[b, b], [b, b + 1], [b, b + 2], [b, b + 3], [b, b + 4]],
+  destroyer: [[d + 1, d], [d + 2, d], [d + 3, d], [d + 4, d]],
+  cruiser: [[c, c + 1], [c, c + 2], [c, c + 3]],
+  patrolBoat: [[p, p + 1], [p, p + 2]],
+  tug: [[t, t]],
 
 };
+
 
 function placeShip() {
   let x;
   let y;
+
   Object.keys(ships).forEach((item) => {
     for (let i = 0; i < ships[item].length; i += 1) {
       const coord = ships[item][i];
@@ -147,5 +172,9 @@ function placeShip() {
     }
   });
   console.log(gameBoard);
+  console.log(randomInt(0, 9));
+  // const ship = shipCover();
+  // console.log(ship.b);
 }
+
 placeShip();
