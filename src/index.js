@@ -127,27 +127,15 @@ gameBoardContainer.addEventListener('click', fireTorpedo, false);
 // initial code via
 // http://www.kirupa.com/html5/handling_events_for_many_elements.htm:
 
-const b = randomInt(0, 9);
-const d = randomInt(0, 9);
-const c = randomInt(0, 9);
-const t = randomInt(0, 9);
-const p = randomInt(0, 9);
 
-// const shipCover = () => ({
-//   ships: {
-//     battleShip: [[b, b], [b, b + 1], [b, b + 2], [b, b + 3], [b, b + 4]],
-//     destroyer: [[d + 1, d], [d + 2, d], [d + 3, d], [d + 4, d]],
-//     cruiser: [[c, c + 1], [c, c + 2], [c, c + 3]],
-//     patrolBoat: [[p, p + 1], [p, p + 2]],
-//     tug: [[t, t]],
-//   },
-// });
+const b = randomInt(0, 4);
+const d = randomInt(0, 5);
+const c = randomInt(0, 6);
+const p = randomInt(0, 7);
+const t = randomInt(0, 9);
+
+
 const ships = {
-  // battleShip: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
-  // destroyer: [[2, 3], [3, 3], [4, 3], [5, 3]],
-  // cruiser: [[6, 5], [6, 6], [6, 7]],
-  // patrolBoat: [[8, 6], [8, 7]],
-  // tug: [[9, 9]],
   battleShip: [[b, b], [b, b + 1], [b, b + 2], [b, b + 3], [b, b + 4]],
   destroyer: [[d + 1, d], [d + 2, d], [d + 3, d], [d + 4, d]],
   cruiser: [[c, c + 1], [c, c + 2], [c, c + 3]],
@@ -156,25 +144,39 @@ const ships = {
 
 };
 
-
 function placeShip() {
-  let x;
-  let y;
-
   Object.keys(ships).forEach((item) => {
+    console.log(ships);
     for (let i = 0; i < ships[item].length; i += 1) {
       const coord = ships[item][i];
       for (let j = 0; j < coord.length; j += 1) {
-        x = coord[0];
-        y = coord[1];
+        const x = coord[0];
+        const y = coord[1];
+        gameBoard[x][y] = 1;
       }
-      gameBoard[x][y] = 1;
     }
   });
   console.log(gameBoard);
-  console.log(randomInt(0, 9));
-  // const ship = shipCover();
-  // console.log(ship.b);
+  return gameBoard;
 }
 
-placeShip();
+
+const displayShip = (id) => {
+  const cell = document.getElementById(id);
+  cell.setAttribute('class', 'showShip');
+  cell.innerHTML = id;
+};
+
+const getId = () => {
+  const board = placeShip();
+  for (let i = 0; i <= 9; i += 1) {
+    for (let j = 0; j <= 9; j += 1) {
+      if (board[i][j] === 1) {
+        const id = `s${i}${j}`;
+        displayShip(id);
+      }
+    }
+  }
+};
+
+getId();

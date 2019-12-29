@@ -11,12 +11,12 @@ const shipFactory = () => ({
   // make random number the first number in the array of array
   // if vertical add 1 to the first number else add 1 to the second number
   battleShip() {
-    const i = randomInt(0, 9);
+    const i = randomInt(0, 5);
     return [[i, i], [i + 1, i], [i + 2, i]];
   },
 
   cruiser() {
-    const j = randomInt(0, 9);
+    const j = randomInt(0, 5);
     return [[j, j], [j + 1, j]];
   },
 
