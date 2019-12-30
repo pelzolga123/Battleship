@@ -17,55 +17,59 @@ p, button, input {
 	margin-bottom:1em;
 }
 
-#content{
-	border-right: 1px solid black;
+body {
+	/* margin: 60px auto; */
+	/* width: 70%; */
+	/* max-width: 950px; */
+	box-sizing: border-box;
 }
 
-#comp{
-	border-right: 1px solid red;
-	width: 45%;
-	display: inline-block;
-	margin-left: 3rem;
+h1 {
+	font-size: 3em;
+	font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
 
-#player{
-	border-right: 1px solid blue;
-	width: 45%;
-	display: inline-block;
-	margin-left: 4.5rem;
+p, button, input {
+	font-size: 1.5em;
+	line-height: 1.4em;
+	color: #333;
+	margin-bottom:1em;
 }
 
-#gameboard {
-position:relative;
-/* margin:0 auto 2em auto; */
-width:500px;
-height:500px;
+body {
+	margin: 25px 75px;
+}
+#battleship {
+	font-family: Arial, sans-serif;
+}
+#volley {
+	padding: 6px 10px;
+}
+#result {
+	margin-left: 20px;
+	font-size: 12px;
+}
+#board {
+	margin-top: 25px;
+}
+td {
+	width: 32px;
+	height: 32px;
+	font-size: 11px;
+	text-align: center;
+	border: 1px solid black;
+	color: #888;
 }
 
-#gameboard div {
-	position:absolute;
-	background: #f6f8f9; /* Old browsers */
-	border: 1px solid #ddd;
-	width:50px;
-	height:50px;
-
+.ship {
+	/* background-color: #CCC; */
 }
 
-#game {
-	position:relative;
-	/* margin:0 auto 2em auto; */
-	width:500px;
-	height:500px;
-	}
+.miss {
+	/* background-color: #6CF; */
+	background-color: blue;
+}
 
-	#game div {
-		position:absolute;
-		background: #f6f8f9; /* Old browsers */
-		border: 1px solid #ddd;
-		width:50px;
-		height:50px;
-	}
-
-	.showShip {
-		background-color: cornflowerblue!important;
-	}
+.hit {
+	background-color: #F00;
+}
