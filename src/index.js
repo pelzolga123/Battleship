@@ -14,6 +14,7 @@ const probabilities = [];
 const boardSize = 10;
 const classMapping = ['ship', 'miss', 'hit'];
 let board;
+let playerBoard;
 // let resultMsg;
 let volleyButton;
 // const monteCarlo = false;
@@ -84,6 +85,18 @@ function setupBoard() {
   recalculateProbabilities();
   redrawBoard(true);
 }
+function setupPlayerBoard() {
+  // initialize positions matrix
+  for (let y = 0; y < boardSize; y += 1) {
+    positions[y] = [];
+    for (let x = 0; x < boardSize; x += 1) {
+      positions[y][x] = null;
+    }
+  }
+  distributeShips();
+  recalculateProbabilities();
+  redrawBoard(true);
+}
 
 function getRandomPosition() {
   const x = Math.floor(Math.random() * 10);
@@ -117,10 +130,12 @@ function placeShip(pos, shipSize, vertical) {
 
 function initialize() {
   board = document.getElementById('board');
+  playerBoard = document.getElementById('player-board');
   // resultMsg = document.getElementById('result');
   // volleyButton = document.getElementById('volley');
   // volleyButton.onclick = (monteCarlo ? runMonteCarlo : beginVolley);
   setupBoard();
+  setupPlayerBoard();
 }
 
 initialize();
@@ -175,6 +190,7 @@ function redrawBoard(displayProbability) {
     boardHTML += '</tr>';
   }
   board.innerHTML = boardHTML;
+  playerBoard.innerHTML = boardHTML;
 }
 
 
@@ -267,7 +283,12 @@ boord.addEventListener('click', (e) => {
       }
 
       if (hitsMade === 17) {
-        alert('All enemy battleships have been defeated! You win!');
+       /* 
+        const winnerDiv = document.getElementById('winner');
+        const winner = document.createElement('h1');
+        winner.innerHTML = 'You win!';
+        winnerDiv.appendChild(winner);
+       */ 
       }
     }
   }
@@ -308,7 +329,7 @@ function fire(e) {
   }
 
   if (hitsMade === 17) {
-    alert('All enemy battleships have been defeated! You win!');
+
   }
 
   e.stopPropagation();

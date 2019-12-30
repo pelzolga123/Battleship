@@ -73,3 +73,16 @@ td {
 .hit {
 	background-color: #F00;
 }
+#player-board{
+	margin-top: 25px;
+}
+#player-board #ship {
+	background-color: steelblue;
+}
+.boards{
+	display: flex;
+    justify-content: space-around;
+}
+#winner{
+	text-align: center;
+}
