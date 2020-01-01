@@ -86,3 +86,9 @@ td {
 #winner{
 	text-align: center;
 }
+.red{
+	background-color: crimson!important;
+}
+.green{
+	background-color: green!important;
+}

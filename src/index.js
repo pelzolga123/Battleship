@@ -35,36 +35,60 @@ function recalculateProbabilities() {
       }
     }
   }
-
-  // calculate probabilities for each type of ship
-  // for (let i = 0, l = ships.length; i < l; i += 1) {
-  //   for (let y = 0; y < boardSize; y += 1) {
-  //     for (let x = 0; x < boardSize; x += 1) {
-  //       // horizontal check
-  //       if (shipCanOccupyPosition(MISS, [x, y], ships[i], false)) {
-  //         increaseProbability([x, y], ships[i], false);
-  //       }
-  //       // vertical check
-  //       if (shipCanOccupyPosition(MISS, [x, y], ships[i], true)) {
-  //         increaseProbability([x, y], ships[i], true);
-  //       }
-  //     }
-  //   }
-  // }
-
-  // skew probabilities for positions adjacent to hits
-  // if (hitsSkewProbabilities) {
-  //   skewProbabilityAroundHits(hits);
-  // }
 }
 
 // TODO onclick of cell with class name ship count the number of hits
 // TODO remove color of ships
-// TODO change color of ship to red when cell is clicked to signify hits
+// TODO change color of( ship to red when cell is clicked to signify hits
 function fireAtWill() {
   const hit = 0;
 }
 
+const getPlayerCells = (elemId) => {
+  const table = document.getElementById('player-board');
+  for (let i = 0; i < table.rows.length; i += 1) {
+    for (let j = 0; j < table.rows[i].cells.length; j += 1) {
+      const cell = table.rows[i].cells[j];
+      cell.setAttribute('class', `${i}${j}`);
+    }
+  }
+  const findElem = document.getElementsByClassName(elemId)[0].id;
+  return findElem;
+};
+
+const delayComputerShoot = (shootId) => {
+  setTimeout(() => {
+    const cellClass = document.getElementsByClassName(shootId);
+    for (let i = 0; i <= cellClass.length; i += 1) {
+      cellClass[i].setAttribute('class', 'red');
+    }
+  }, 2000);
+};
+const delayComputerMiss = (shootId) => {
+  setTimeout(() => {
+    const cellClass = document.getElementsByClassName(shootId);
+    for (let i = 0; i < cellClass.length; i += 1) {
+      cellClass[i].setAttribute('class', 'green');
+    }
+  }, 2000);
+};
+
+const computerHit = () => {
+  let hit = 0;
+  while (hit <= 17) {
+    const hitCoords = getRandomPosition();
+    const x = hitCoords[0];
+    const y = hitCoords[1];
+    const shootId = `${x}${y}`;
+    const getCell = getPlayerCells(shootId);
+    if (getCell === 'ship') {
+      delayComputerShoot(shootId);
+      hit += 1;
+    } else {
+      delayComputerMiss(shootId);
+    }
+  }
+};
 
 function setupBoard() {
   // initialize positions matrix
@@ -74,12 +98,6 @@ function setupBoard() {
       positions[y][x] = null;
     }
   }
-
-  // determine hits to win given the set of ships
-  // hitsMade = hitsToWin = 0;
-  // for (let i = 0, l = ships.length; i < l; i += 1) {
-  //   hitsToWin += ships[i];
-  // }
 
   distributeShips();
   recalculateProbabilities();
@@ -101,7 +119,6 @@ function setupPlayerBoard() {
 function getRandomPosition() {
   const x = Math.floor(Math.random() * 10);
   const y = Math.floor(Math.random() * 10);
-
   return [x, y];
 }
 
@@ -136,6 +153,8 @@ function initialize() {
   // volleyButton.onclick = (monteCarlo ? runMonteCarlo : beginVolley);
   setupBoard();
   setupPlayerBoard();
+
+  computerHit();
 }
 
 initialize();
@@ -193,72 +212,6 @@ function redrawBoard(displayProbability) {
   playerBoard.innerHTML = boardHTML;
 }
 
-
-// function increaseProbability(pos, shipSize, vertical) {
-//   // "pos" is ship origin
-//   const x = pos[0];
-//   const y = pos[1];
-//   const z = (vertical ? y : x);
-//   const end = z + shipSize - 1;
-
-//   for (let i = z; i <= end; i++) {
-//     if (vertical) probabilities[x][i] += 1;
-//     else probabilities[i][y] += 1;
-//   }
-// }
-
-// function skewProbabilityAroundHits(toSkew) {
-//   const uniques = [];
-
-//   // add adjacent positions to the positions to be skewed
-//   for (var i = 0, l = toSkew.length; i < l; i += 1) {
-//     toSkew = toSkew.concat(getAdjacentPositions(toSkew[i]));
-//   }
-
-//   // store uniques to avoid skewing positions multiple times
-//   // TODO: do A/B testing to see if doing this with strings is efficient
-//   for (var i = 0, l = toSkew.length; i < l; i++) {
-//     const uniquesStr = uniques.join('|').toString();
-//     if (uniquesStr.indexOf(toSkew[i].toString()) === -1) {
-//       uniques.push(toSkew[i]);
-
-//       // skew probability
-//       const x = toSkew[i][0];
-//       const y = toSkew[i][1];
-//       probabilities[x][y] *= skewFactor;
-//     }
-//   }
-// }
-
-// function getAdjacentPositions(pos) {
-//   const x = pos[0];
-//   const y = pos[1];
-//   const adj = [];
-
-//   if (y + 1 < boardSize) adj.push([x, y + 1]);
-//   if (y - 1 >= 0) adj.push([x, y - 1]);
-//   if (x + 1 < boardSize) adj.push([x + 1, y]);
-//   if (x - 1 >= 0) adj.push([x - 1, y]);
-
-//   return adj;
-// }
-
-
-// function beginVolley() {
-//   if (hitsMade > 0) setupBoard();
-//   resultMsg.innerHTML = '';
-//   volleyButton.disabled = true;
-//   let moves = 0;
-//   var volley = setInterval(() => {
-//     fireAtBestPosition();
-//     moves += 1;
-//     if (hitsMade === hitsToWin) {
-//       resultMsg.innerHTML = `All ships sunk in ${moves} moves.`;
-//       clearInterval(volley);
-//       volleyButton.disabled = false;
-//     }
-//   }, 50);
-// }
 const boord = document.getElementById('board');
 boord.addEventListener('click', (e) => {
   // e.preventDefault;
@@ -283,12 +236,12 @@ boord.addEventListener('click', (e) => {
       }
 
       if (hitsMade === 17) {
-       /* 
+        /*
         const winnerDiv = document.getElementById('winner');
         const winner = document.createElement('h1');
         winner.innerHTML = 'You win!';
         winnerDiv.appendChild(winner);
-       */ 
+       */
       }
     }
   }
@@ -334,79 +287,3 @@ function fire(e) {
 
   e.stopPropagation();
 }
-
-// function fireTorpedo(e) {
-//   // if item clicked (e.target) is not the parent element on which the event listener was set (e.currentTarget)
-//   if (e.target !== e.currentTarget) {
-//     // extract row and column # from the HTML element's id
-//     const row = e.target.id.substring(1, 2);
-//     const col = e.target.id.substring(2, 3);
-//     // alert("Clicked on row " + row + ", col " + col);
-
-//     // if player clicks a square with no ship, change the color and change square's value
-//     if (gameBoard[row][col] === 0) {
-//       e.target.style.background = '#bbb';
-//       // set this square's value to 3 to indicate that they fired and missed
-//       gameBoard[row][col] = 3;
-
-//       // if player clicks a square with a ship, change the color and change square's value
-//     } else if (gameBoard[row][col] === 1) {
-//       e.target.style.background = 'red';
-//       // set this square's value to 2 to indicate the ship has been hit
-//       gameBoard[row][col] = 2;
-
-//       // increment hitCount each time a ship is hit
-//       hitCount += 1;
-//       // this definitely shouldn't be hard-coded, but here it is anyway. lazy, simple solution:
-//       if (hitCount === 17) {
-//         alert('All enemy battleships have been defeated! You win!');
-//       }
-
-//       // if player clicks a square that's been previously hit, let them know
-//     } else if (gameBoard[row][col] > 1) {
-//       alert('Stop wasting your torpedos! You already fired at this location.');
-//     }
-//   }
-//   e.stopPropagation();
-// }
-
-// function getBestUnplayedPosition() {
-//   let bestProb = 0;
-//   let bestPos;
-
-//   // so far there is no tie-breaker -- first position
-//   // with highest probability on board is returned
-//   for (let y = 0; y < boardSize; y += 1) {
-//     for (let x = 0; x < boardSize; x += 1) {
-//       if (!positions[x][y] && probabilities[x][y] > bestProb) {
-//         bestProb = probabilities[x][y];
-//         bestPos = [x, y];
-//       }
-//     }
-//   }
-
-//   return bestPos;
-// }
-
-
-// function runMonteCarlo() {
-//   let elapsed; let sum = 0;
-//   const runs = (hitsSkewProbabilities ? 50 : 1000);
-
-//   elapsed = (new Date()).getTime();
-
-//   for (let i = 0; i < runs; i += 1) {
-//     let moves = 0;
-//     setupBoard();
-//     while (hitsMade < hitsToWin) {
-//       fireAtBestPosition();
-//       moves += 1;
-//     }
-//     sum += moves;
-//   }
-
-//   elapsed = (new Date()).getTime() - elapsed;
-//   console.log(`test duration: ${elapsed}ms`);
-
-//   resultMsg.innerHTML = `Average moves: ${sum / runs}`;
-// }
