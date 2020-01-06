@@ -5,6 +5,7 @@ const HIT = 2;
 let hitsMade = 0;
 let hitsCount = 0;
 const ships = [5, 4, 3, 3, 2];
+const computer = [5, 4, 3, 3, 2];
 const positions = [];
 const probabilities = [];
 
