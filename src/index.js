@@ -33,10 +33,6 @@ function recalculateProbabilities() {
   }
 }
 
-function fireAtWill() {
-  const hit = 0;
-}
-
 const shootingMatrix = () => {
   const matrix = new Set();
 
@@ -55,7 +51,6 @@ const matrixValues = () => {
   const data = compMatrix.values();
   const item = data.next().value;
   compMatrix.delete(item);
-  console.log(compMatrix);
   return item;
 };
 
@@ -67,11 +62,20 @@ const getPlayerCells = (elemId) => {
       cell.setAttribute('class', `${i}${j}`);
     }
   }
-  const findElem = document.getElementsByClassName(elemId)[0].id;
+  while (typeof removeUndefined(elemId) !== 'undefined') {
+    return removeUndefined(elemId);
+  }
+};
+
+const removeUndefined = (elemId) => {
+  let findElem;
+  if (typeof elemId !== 'undefined') {
+    findElem = document.getElementsByClassName(elemId)[0].id;
+  }
   return findElem;
 };
 
-const delayComputerShoot = (shootId) => {
+const computerShoot = (shootId) => {
   setTimeout(() => {
     const cellClass = document.getElementsByClassName(shootId);
     for (let i = 0; i <= cellClass.length; i += 1) {
@@ -79,10 +83,10 @@ const delayComputerShoot = (shootId) => {
     }
   }, 2000);
 };
-const delayComputerMiss = (shootId) => {
+const computerMiss = (shootId) => {
   setTimeout(() => {
     const cellClass = document.getElementsByClassName(shootId);
-    for (let i = 0; i < cellClass.length; i += 1) {
+    for (let i = 0; i <= cellClass.length; i += 1) {
       cellClass[i].setAttribute('class', 'green');
     }
   }, 2000);
@@ -93,18 +97,19 @@ const coords = () => {
   return matrix;
 };
 
-
-const computerHit = () => {
+function computerHit() {
   const matrix = coords();
+
   const getCell = getPlayerCells(matrix);
+
   if (getCell === 'ship') {
-    delayComputerShoot(matrix);
+    computerShoot(matrix);
     hitsCount += 1;
   } else {
-    delayComputerMiss(matrix);
+    computerMiss(matrix);
   }
   return hitsCount;
-};
+}
 
 function setupBoard() {
   // initialize positions matrix
@@ -159,35 +164,36 @@ function placeShip(pos, shipSize, vertical) {
   return false;
 }
 
+const getTurn = () => {
+  if (turn === 'comp') {
+    turn = 'user';
+  } else if (turn === 'user') {
+    turn = 'comp';
+  }
+  return turn;
+};
 
 function initialize() {
   board = document.getElementById('board');
   playerBoard = document.getElementById('player-board');
   setupBoard();
   setupPlayerBoard();
-
+  const winner = document.getElementById('winner-h1');
   while (computerHit() <= 16) {
-    console.log(turn);
-    console.log(computerHit());
-    if (turn === 'comp') {
-      computerHit();
-      turn = 'user';
-    } else if (turn === 'user') {
-      turn = 'comp';
+    const turns = getTurn();
+    if (turns === 'comp') {
+      winner.innerHTML = 'computer`s turn';
+      console.log('comp');
+      setInterval(computerHit(), 4000);
+    }
+    if (turns === 'user') {
+      winner.innerHTML = ' user`s turn';
+      console.log('user');
     }
   }
-  /*
-  const winnerComp = computerHit();
-  if (winnerComp >= 16) {
-    const winnerDiv = document.getElementById('winner');
-    const winner = document.createElement('h1');
-    winner.innerHTML = 'You win!';
-    winnerDiv.appendChild(winner);
-  }*/
 }
 
 initialize();
-
 
 function distributeShips() {
   let pos; let shipPlaced; let vertical;
@@ -200,20 +206,6 @@ function distributeShips() {
     }
   }
 }
-
-const boord = document.getElementById('board');
-boord.addEventListener('click', (e) => {
-  for (let y = 0; y < boardSize; y += 1) {
-    for (let x = 0; x < boardSize; x += 1) {
-      if (e.target && e.target.id === 'ship') {
-        e.target.style.background = 'red';
-        hitsMade += 1;
-      } else {
-        e.target.style.background = 'blue';
-      }
-    }
-  }
-});
 
 function shipCanOccupyPosition(criteriaForRejection, pos, shipSize, vertical) {
   const x = pos[0];
@@ -233,6 +225,17 @@ function shipCanOccupyPosition(criteriaForRejection, pos, shipSize, vertical) {
   return true;
 }
 
+function addEvent() {
+  document.querySelectorAll('#board td').forEach((e) => e.addEventListener('click', (n) => {
+    if (n.target && n.target.id === 'ship') {
+      n.target.style.background = 'red';
+      hitsMade += 1;
+    } else {
+      n.target.style.background = 'blue';
+    }
+  }));
+  return hitsMade;
+}
 
 function redrawBoard(displayProbability) {
   let boardHTML = '';
@@ -249,20 +252,5 @@ function redrawBoard(displayProbability) {
   }
   board.innerHTML = boardHTML;
   playerBoard.innerHTML = boardHTML;
-}
-
-
-function fire(e) {
-  if (e.target && e.target.id === 'ship') {
-    e.target.style.background = 'red';
-    hitsMade += 1;
-  } else {
-    e.target.style.background = 'blue';
-  }
-
-  if (hitsMade === 17) {
-
-  }
-
-  e.stopPropagation();
+  addEvent();
 }
