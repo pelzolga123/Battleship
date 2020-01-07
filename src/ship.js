@@ -1,10 +1,15 @@
 const Ship = (size) => ({
-  position: new Array(size),
-  hit(num) {
-    this.position[num] = 'X';
+  size,
+  position: [],
+  hits: 0,
+  hit() {
+    if (this.isSunk()) {
+      return undefined;
+    }
+    return this.hits === this.hits + 1;
   },
   isSunk() {
-    this.position.every((posit) => posit === 'X');
+    return this.hits >= this.size;
   },
 });
 
