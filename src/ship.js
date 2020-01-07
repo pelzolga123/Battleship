@@ -14,3 +14,5 @@ const Ship = (size) => ({
 });
 
 export default Ship;
+
+// number of ships sunk

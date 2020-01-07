@@ -19,4 +19,9 @@ describe('ships', () => {
   it('Checks if Ships is an object', () => {
     expect(typeof mockShip).toBe('object');
   });
+
+  it('Checks the Length of the newly created ship', () => {
+    const newShip = mockShip(3);
+    expect(newShip.size).toBe(3);
+  });
 });

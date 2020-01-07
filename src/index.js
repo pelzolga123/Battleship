@@ -5,28 +5,38 @@ const HIT = 2;
 let hitsMade = 0;
 let hitsCount = 0;
 const ships = [5, 4, 3, 3, 2];
-const computer = [5, 4, 3, 3, 2];
+const computer = [2, 3, 4, 3, 5];
 const positions = [];
 const probabilities = [];
+const grid = [];
 
 const boardSize = 10;
 const classMapping = ['ship', 'miss', 'hit'];
 let board;
 let playerBoard;
-// let resultMsg;
-let volleyButton;
+// let volleyButton;
 let turn = 'comp';
 
 
-function recalculateProbabilities() {
+function generate() {
   const hits = [];
-
-  // reset probabilities
   for (let y = 0; y < boardSize; y += 1) {
     probabilities[y] = [];
     for (let x = 0; x < boardSize; x += 1) {
       probabilities[y][x] = 0;
-      // we remember hits as we find them for skewing
+      if (positions[x][y] === HIT) {
+        hits.push([x, y]);
+      }
+    }
+  }
+}
+
+function generateComp() {
+  const hits = [];
+  for (let y = 0; y < boardSize; y += 1) {
+    grid[y] = [];
+    for (let x = 0; x < boardSize; x += 1) {
+      grid[y][x] = 0;
       if (positions[x][y] === HIT) {
         hits.push([x, y]);
       }
@@ -121,7 +131,7 @@ function setupBoard() {
     }
   }
   distributeShips();
-  recalculateProbabilities();
+  generate();
   redrawBoard(true);
 }
 function setupPlayerBoard() {
@@ -132,9 +142,9 @@ function setupPlayerBoard() {
       positions[y][x] = null;
     }
   }
-  distributeShips();
-  recalculateProbabilities();
-  redrawBoard(true);
+  distributeShipComp();
+  generateComp();
+  redrawBoardComp(true);
 }
 
 function getRandomPosition() {
@@ -208,7 +218,19 @@ function distributeShips() {
   }
 }
 
-function shipCanOccupyPosition(criteriaForRejection, pos, shipSize, vertical) {
+function distributeShipComp() {
+  let pos; let shipPlaced; let vertical;
+  for (let i = 0, l = ships.length; i < l; i += 1) {
+    shipPlaced = false;
+    vertical = randomBoolean();
+    while (!shipPlaced) {
+      pos = getRandomPosition();
+      shipPlaced = placeShip(pos, ships[i], vertical);
+    }
+  }
+}
+
+function shipCanOccupyPosition(bool, pos, shipSize, vertical) {
   const x = pos[0];
   const y = pos[1];
   const z = (vertical ? y : x);
@@ -220,7 +242,7 @@ function shipCanOccupyPosition(criteriaForRejection, pos, shipSize, vertical) {
   // check if there's an obstacle
   for (let i = z; i <= end; i += 1) {
     const thisPos = (vertical ? positions[x][i] : positions[i][y]);
-    if (thisPos === criteriaForRejection) return false;
+    if (thisPos === bool) return false;
   }
 
   return true;
@@ -238,7 +260,7 @@ function addEvent() {
   return hitsMade;
 }
 
-function redrawBoard(displayProbability) {
+function redrawBoard(status = false) {
   let boardHTML = '';
   for (let y = 0; y < boardSize; y += 1) {
     boardHTML += '<tr>';
@@ -252,6 +274,24 @@ function redrawBoard(displayProbability) {
     boardHTML += '</tr>';
   }
   board.innerHTML = boardHTML;
+  // playerBoard.innerHTML = boardHTML;
+  addEvent();
+}
+
+
+function redrawBoardComp(status = false) {
+  let boardHTML = '';
+  for (let y = 0; y < boardSize; y += 1) {
+    boardHTML += '<tr>';
+    for (let x = 0; x < boardSize; x += 1) {
+      const thisPos = positions[x][y];
+      boardHTML += '<td id="';
+      if (thisPos !== null) boardHTML += classMapping[thisPos];
+      boardHTML += '">';
+      boardHTML += '</td>';
+    }
+    boardHTML += '</tr>';
+  }
   playerBoard.innerHTML = boardHTML;
   addEvent();
 }
