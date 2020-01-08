@@ -110,9 +110,7 @@ const coords = () => {
 
 function computerHit() {
   const matrix = coords();
-
   const getCell = getPlayerCells(matrix);
-
   if (getCell === 'ship') {
     computerShoot(matrix);
     hitsCount += 1;
@@ -184,24 +182,30 @@ const getTurn = () => {
   return turn;
 };
 
+const fight = () => {
+  const winner = document.getElementById('winner-h1');
+  const turns = getTurn();
+  if (turns === 'comp') {
+    winner.innerHTML = 'computer`s turn';
+    computerHit();
+    playerBoard.classList.remove('freeze');
+    board.classList.add('freeze');
+    console.log('comp');
+  }
+  if (turns === 'user') {
+    winner.innerHTML = ' user`s turn';
+    playerBoard.classList.add('freeze');
+    board.classList.remove('freeze');
+    console.log('user');
+  }
+};
+
 function initialize() {
   board = document.getElementById('board');
   playerBoard = document.getElementById('player-board');
   setupBoard();
   setupPlayerBoard();
-  const winner = document.getElementById('winner-h1');
-  while (computerHit() <= 16) {
-    const turns = getTurn();
-    if (turns === 'comp') {
-      winner.innerHTML = 'computer`s turn';
-      console.log('comp');
-      setInterval(computerHit(), 4000);
-    }
-    if (turns === 'user') {
-      winner.innerHTML = ' user`s turn';
-      console.log('user');
-    }
-  }
+  setInterval(fight, 5000);
 }
 
 initialize();

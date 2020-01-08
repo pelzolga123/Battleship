@@ -92,3 +92,7 @@ td {
 .green{
 	background-color: green!important;
 }
+.freeze{
+	pointer-events: none;
+	opacity: 0.5;
+}
