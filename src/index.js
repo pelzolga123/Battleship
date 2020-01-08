@@ -132,6 +132,7 @@ function setupBoard() {
   generate();
   redrawBoard(true);
 }
+
 function setupPlayerBoard() {
   // initialize positions matrix
   for (let y = 0; y < boardSize; y += 1) {
