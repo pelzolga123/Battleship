@@ -2,7 +2,7 @@
 import Ship from './ships';
 
 let hitsMade = 0;
-let hitsCount = 0;
+const hitsCount = 0;
 let userHit = 0;
 let turn = 'comp';
 
@@ -108,23 +108,35 @@ const getPlayerCells = (elemId) => {
   return findElem;
 };
 
+
 const computerShoot = (shootId) => {
-  setTimeout(() => {
-    const cellClass = document.getElementsByClassName(shootId);
-    for (let i = 0; i <= cellClass.length; i += 1) {
-      cellClass[i].style.background = 'red';
-      // console.log(cellClass[i]);
-    }
-  }, 1500);
+  const data = document.getElementsByClassName(shootId)[0];
+  data.style.background = 'red';
 };
+
+// const computerShoot = (shootId) => {
+//   setTimeout(() => {
+//     const cellClass = document.getElementsByClassName(shootId);
+//     for (let i = 0; i <= cellClass.length; i += 1) {
+//       cellClass[i].style.background = 'red';
+//       // console.log(cellClass[i]);
+//     }
+//   }, 7500);
+// };
+
+
+// const computerMiss = (shootId) => {
+//   setTimeout(() => {
+//     const cellClass = document.getElementsByClassName(shootId);
+//     for (let i = 0; i <= cellClass.length; i += 1) {
+//       cellClass[i].style.background = 'green';
+//     }
+//   }, 7500);
+// };
+
 const computerMiss = (shootId) => {
-  setTimeout(() => {
-    const cellClass = document.getElementsByClassName(shootId);
-    for (let i = 0; i <= cellClass.length; i += 1) {
-      cellClass[i].style.background = 'green';
-      // console.log(cellClass[i]);
-    }
-  }, 1500);
+  const data = document.getElementsByClassName(shootId)[0];
+  data.style.background = 'green';
 };
 
 const coords = () => {
@@ -132,12 +144,13 @@ const coords = () => {
   return matrix;
 };
 
+
 function computerHit() {
   const matrix = coords();
   const getCell = getPlayerCells(matrix);
   if (getCell === 'ship') {
     computerShoot(matrix);
-    hitsCount += 1;
+    // hitsCount += 1;
   } else {
     computerMiss(matrix);
   }
@@ -237,7 +250,7 @@ function initialize() {
     if (hitsCount === 16) {
       clearInterval(f);
     }
-  }, 2000);
+  }, 5000);
 }
 
 initialize();
@@ -300,6 +313,7 @@ function addEvent() {
 }
 
 // computer taking turns
+const human = false;
 function compEvent() {
   const playerEvent = addEvent();
   if (!playerEvent) {
