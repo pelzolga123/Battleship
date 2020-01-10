@@ -215,6 +215,7 @@ const fight = () => {
     board.classList.add('freeze');
     winner.innerHTML = 'computer`s turn';
     computerHit();
+    compEvent();
     console.log('comp', hitsCount);
   }
   if (turns === 'user') {
@@ -296,6 +297,24 @@ function addEvent() {
   }));
   userHit += 1;
   return tmp;
+}
+
+function compEvent() {
+  const playerEvent = addEvent();
+  let tmp;
+  if (!playerEvent) {
+    document.querySelectorAll('#player-board td').forEach((e) => e.addEventListener('click', (n) => {
+      if (n.target && n.target.id === 'ship') {
+        n.target.style.background = 'red';
+        hitsMade += 1;
+      } else {
+        n.target.style.background = 'blue';
+      }
+      tmp = true;
+    }));
+  } else {
+    playerEvent();
+  }
 }
 
 function redrawBoard() {
