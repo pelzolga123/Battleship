@@ -73,10 +73,10 @@ td {
 .hit {
 	background-color: #F00;
 }
-#player-board{
+#playerBoard{
 	margin-top: 25px;
 }
-#player-board #ship {
+#playerBoard #ship {
 	background-color: steelblue;
 }
 .boards{
