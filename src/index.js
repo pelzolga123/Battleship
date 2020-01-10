@@ -113,7 +113,7 @@ const computerShoot = (shootId) => {
     const cellClass = document.getElementsByClassName(shootId);
     for (let i = 0; i <= cellClass.length; i += 1) {
       cellClass[i].style.background = 'red';
-      console.log(cellClass[i]);
+      // console.log(cellClass[i]);
     }
   }, 1500);
 };
@@ -122,7 +122,7 @@ const computerMiss = (shootId) => {
     const cellClass = document.getElementsByClassName(shootId);
     for (let i = 0; i <= cellClass.length; i += 1) {
       cellClass[i].style.background = 'green';
-      console.log(cellClass[i]);
+      // console.log(cellClass[i]);
     }
   }, 1500);
 };
@@ -299,19 +299,13 @@ function addEvent() {
   return tmp;
 }
 
+// computer taking turns
 function compEvent() {
   const playerEvent = addEvent();
-  let tmp;
   if (!playerEvent) {
-    document.querySelectorAll('#player-board td').forEach((e) => e.addEventListener('click', (n) => {
-      if (n.target && n.target.id === 'ship') {
-        n.target.style.background = 'red';
-        hitsMade += 1;
-      } else {
-        n.target.style.background = 'blue';
-      }
-      tmp = true;
-    }));
+  // if playerEvent did not occur then it's computer's  turn to play
+  // computer plays
+    computerHit();
   } else {
     playerEvent();
   }
