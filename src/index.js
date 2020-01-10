@@ -9,7 +9,7 @@ const computer = [2, 3, 4, 3, 5];
 const positions = [];
 const probabilities = [];
 const grid = [];
-
+let userHit = 0;
 const boardSize = 10;
 const classMapping = ['ship', 'miss', 'hit'];
 let board;
@@ -76,6 +76,8 @@ const getPlayerCells = (elemId) => {
   while (typeof removeUndefined(elemId) !== 'undefined') {
     return removeUndefined(elemId);
   }
+  const findElem = document.getElementsByClassName(elemId)[0].id;
+  return findElem;
 };
 
 const removeUndefined = (elemId) => {
@@ -90,17 +92,19 @@ const computerShoot = (shootId) => {
   setTimeout(() => {
     const cellClass = document.getElementsByClassName(shootId);
     for (let i = 0; i <= cellClass.length; i += 1) {
-      cellClass[i].setAttribute('class', 'red');
+      cellClass[i].style.background = 'red';
+      console.log(cellClass[i]);
     }
-  }, 2000);
+  }, 1500);
 };
 const computerMiss = (shootId) => {
   setTimeout(() => {
     const cellClass = document.getElementsByClassName(shootId);
     for (let i = 0; i <= cellClass.length; i += 1) {
-      cellClass[i].setAttribute('class', 'green');
+      cellClass[i].style.background = 'green';
+      console.log(cellClass[i]);
     }
-  }, 2000);
+  }, 1500);
 };
 
 const coords = () => {
@@ -130,7 +134,7 @@ function setupBoard() {
   }
   distributeShips();
   generate();
-  redrawBoard(true);
+  redrawBoard();
 }
 
 function setupPlayerBoard() {
@@ -143,7 +147,7 @@ function setupPlayerBoard() {
   }
   distributeShipComp();
   generateComp();
-  redrawBoardComp(true);
+  redrawBoardComp();
 }
 
 function getRandomPosition() {
@@ -187,16 +191,17 @@ const fight = () => {
   const winner = document.getElementById('winner-h1');
   const turns = getTurn();
   if (turns === 'comp') {
-    winner.innerHTML = 'computer`s turn';
-    computerHit();
     playerBoard.classList.remove('freeze');
     board.classList.add('freeze');
-    console.log('comp');
+    winner.innerHTML = 'computer`s turn';
+    computerHit();
+    console.log('comp', hitsCount);
   }
   if (turns === 'user') {
-    winner.innerHTML = ' user`s turn';
     playerBoard.classList.add('freeze');
     board.classList.remove('freeze');
+    winner.innerHTML = ' user`s turn';
+    addEvent();
     console.log('user');
   }
 };
@@ -206,7 +211,12 @@ function initialize() {
   playerBoard = document.getElementById('player-board');
   setupBoard();
   setupPlayerBoard();
-  setInterval(fight, 5000);
+  const f = setInterval(() => {
+    fight();
+    if (hitsCount === 16) {
+      clearInterval(f);
+    }
+  }, 2000);
 }
 
 initialize();
@@ -254,6 +264,7 @@ function shipCanOccupyPosition(bool, pos, shipSize, vertical) {
 }
 
 function addEvent() {
+  let tmp;
   document.querySelectorAll('#board td').forEach((e) => e.addEventListener('click', (n) => {
     if (n.target && n.target.id === 'ship') {
       n.target.style.background = 'red';
@@ -261,11 +272,13 @@ function addEvent() {
     } else {
       n.target.style.background = 'blue';
     }
+    tmp = true;
   }));
-  return hitsMade;
+  userHit += 1;
+  return tmp;
 }
 
-function redrawBoard(status = false) {
+function redrawBoard() {
   let boardHTML = '';
   for (let y = 0; y < boardSize; y += 1) {
     boardHTML += '<tr>';
@@ -279,12 +292,10 @@ function redrawBoard(status = false) {
     boardHTML += '</tr>';
   }
   board.innerHTML = boardHTML;
-  // playerBoard.innerHTML = boardHTML;
-  addEvent();
 }
 
 
-function redrawBoardComp(status = false) {
+function redrawBoardComp() {
   let boardHTML = '';
   for (let y = 0; y < boardSize; y += 1) {
     boardHTML += '<tr>';
@@ -298,5 +309,4 @@ function redrawBoardComp(status = false) {
     boardHTML += '</tr>';
   }
   playerBoard.innerHTML = boardHTML;
-  addEvent();
 }
