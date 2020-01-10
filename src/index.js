@@ -1,21 +1,52 @@
 /* eslint-disable max-len */
+import Ship from './ships';
+
+let hitsMade = 0;
+let hitsCount = 0;
+let userHit = 0;
+let turn = 'comp';
 
 const SHIP = 0;
 const HIT = 2;
-let hitsMade = 0;
-let hitsCount = 0;
-const ships = [5, 4, 3, 3, 2];
-const computer = [2, 3, 4, 3, 5];
+
 const positions = [];
 const probabilities = [];
 const grid = [];
-let userHit = 0;
 const boardSize = 10;
 const classMapping = ['ship', 'miss', 'hit'];
 let board;
 let playerBoard;
 // let volleyButton;
-let turn = 'comp';
+
+const userShips = [
+  Ship(5),
+  Ship(4),
+  Ship(3),
+  Ship(3),
+  Ship(2),
+];
+
+const compShips = [
+  Ship(5),
+  Ship(4),
+  Ship(3),
+  Ship(3),
+  Ship(2),
+];
+
+const allShipsSunk = () => {
+  let count = 0;
+  compShips.forEach((ship) => {
+    if (ship.isSunk() === true) {
+      count += 1;
+    }
+  });
+
+  if (count === 5) {
+    return true;
+  } return false;
+};
+console.log(allShipsSunk());
 
 
 function generate() {
@@ -73,18 +104,7 @@ const getPlayerCells = (elemId) => {
       cell.setAttribute('class', `${i}${j}`);
     }
   }
-  while (typeof removeUndefined(elemId) !== 'undefined') {
-    return removeUndefined(elemId);
-  }
   const findElem = document.getElementsByClassName(elemId)[0].id;
-  return findElem;
-};
-
-const removeUndefined = (elemId) => {
-  let findElem;
-  if (typeof elemId !== 'undefined') {
-    findElem = document.getElementsByClassName(elemId)[0].id;
-  }
   return findElem;
 };
 
@@ -148,8 +168,8 @@ function setupPlayerBoard() {
 }
 
 function getRandomPosition() {
-  const x = Math.floor(Math.random() * 10);
-  const y = Math.floor(Math.random() * 10);
+  const x = Math.floor(Math.random() * 9);
+  const y = Math.floor(Math.random() * 9);
   return [x, y];
 }
 
@@ -220,24 +240,24 @@ initialize();
 
 function distributeShips() {
   let pos; let shipPlaced; let vertical;
-  for (let i = 0, l = ships.length; i < l; i += 1) {
+  for (let i = 0, l = userShips.length; i < l; i += 1) {
     shipPlaced = false;
     vertical = randomBoolean();
     while (!shipPlaced) {
       pos = getRandomPosition();
-      shipPlaced = placeShip(pos, ships[i], vertical);
+      shipPlaced = placeShip(pos, userShips[i].size, vertical);
     }
   }
 }
 
 function distributeShipComp() {
   let pos; let shipPlaced; let vertical;
-  for (let i = 0, l = ships.length; i < l; i += 1) {
+  for (let i = 0, l = compShips.length; i < l; i += 1) {
     shipPlaced = false;
     vertical = randomBoolean();
     while (!shipPlaced) {
       pos = getRandomPosition();
-      shipPlaced = placeShip(pos, ships[i], vertical);
+      shipPlaced = placeShip(pos, compShips[i].size, vertical);
     }
   }
 }
