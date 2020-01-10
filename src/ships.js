@@ -3,14 +3,14 @@ const Ship = (size) => {
 
   const hit = (coords) => {
     hitCoords.push(coords);
+    /* const hitSpot = document.getElementById(coords);
+    hitSpot.setAttribute('class', 'hit'); */
   };
 
   const isSunk = () => {
-    let status;
     if (size === hitCoords.length) {
-      status = true;
-    }
-    return status;
+      return true;
+    } return false;
   };
 
   return {
