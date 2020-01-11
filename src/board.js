@@ -4,7 +4,7 @@ const Board = (userShips) => {
   const positions = [];
   const HIT = 2;
   const SHIP = 0;
-  const probabilities = [];
+  const grid = [];
 
   const getRandomPosition = () => {
     const x = Math.floor(Math.random() * 10);
@@ -65,9 +65,9 @@ const Board = (userShips) => {
   const generate = () => {
     const hits = [];
     for (let y = 0; y < boardSize; y += 1) {
-      probabilities[y] = [];
+      grid[y] = [];
       for (let x = 0; x < boardSize; x += 1) {
-        probabilities[y][x] = 0;
+        grid[y][x] = 0;
         if (positions[x][y] === HIT) {
           hits.push([x, y]);
         }
