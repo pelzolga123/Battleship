@@ -2,13 +2,7 @@
 import Ship from './ships';
 import Board from './board';
 
-<<<<<<< HEAD
-let hitsMade = 0;
 const hitsCount = 0;
-let userHit = 0;
-=======
-let hitsCount = 0;
->>>>>>> 6ed9c5516ba0a36ac214b22ff1c8d42625c61691
 let turn = 'comp';
 
 // let volleyButton;
@@ -87,29 +81,6 @@ const computerShoot = (shootId) => {
   data.style.background = 'red';
 };
 
-<<<<<<< HEAD
-// const computerShoot = (shootId) => {
-//   setTimeout(() => {
-//     const cellClass = document.getElementsByClassName(shootId);
-//     for (let i = 0; i <= cellClass.length; i += 1) {
-//       cellClass[i].style.background = 'red';
-//       // console.log(cellClass[i]);
-//     }
-//   }, 7500);
-// };
-
-
-// const computerMiss = (shootId) => {
-//   setTimeout(() => {
-//     const cellClass = document.getElementsByClassName(shootId);
-//     for (let i = 0; i <= cellClass.length; i += 1) {
-//       cellClass[i].style.background = 'green';
-//     }
-//   }, 7500);
-// };
-
-=======
->>>>>>> 6ed9c5516ba0a36ac214b22ff1c8d42625c61691
 const computerMiss = (shootId) => {
   const data = document.getElementsByClassName(shootId)[0];
   data.style.background = 'green';
@@ -190,52 +161,3 @@ function addEvent() {
   }));
   return tmp;
 }
-<<<<<<< HEAD
-
-// computer taking turns
-const human = false;
-function compEvent() {
-  const playerEvent = addEvent();
-  if (!playerEvent) {
-  // if playerEvent did not occur then it's computer's  turn to play
-  // computer plays
-    computerHit();
-  } else {
-    playerEvent();
-  }
-}
-
-function redrawBoard() {
-  let boardHTML = '';
-  for (let y = 0; y < boardSize; y += 1) {
-    boardHTML += '<tr>';
-    for (let x = 0; x < boardSize; x += 1) {
-      const thisPos = positions[x][y];
-      boardHTML += '<td id="';
-      if (thisPos !== null) boardHTML += classMapping[thisPos];
-      boardHTML += '">';
-      boardHTML += '</td>';
-    }
-    boardHTML += '</tr>';
-  }
-  board.innerHTML = boardHTML;
-}
-
-
-function redrawBoardComp() {
-  let boardHTML = '';
-  for (let y = 0; y < boardSize; y += 1) {
-    boardHTML += '<tr>';
-    for (let x = 0; x < boardSize; x += 1) {
-      const thisPos = positions[x][y];
-      boardHTML += '<td id="';
-      if (thisPos !== null) boardHTML += classMapping[thisPos];
-      boardHTML += '">';
-      boardHTML += '</td>';
-    }
-    boardHTML += '</tr>';
-  }
-  playerBoard.innerHTML = boardHTML;
-}
-=======
->>>>>>> 6ed9c5516ba0a36ac214b22ff1c8d42625c61691
