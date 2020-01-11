@@ -1,71 +1,54 @@
 /* eslint-disable no-undef */
 import mockShip from '../src/ships';
-// import * as dependency from '../src/ships';
-
-
-// const Ship = require('../src/ships');
-// const mockShip = {
-//   hit: jest.fn(),
-//   isSunk: jest.fn(),
-// };
-
-// jest.mock('../src/ships.js', () => mockShip);
-
-// const mockShip = require('../src/ships');
 
 
 describe('Ship', () => {
-  // it('Checks if hit has been called', () => {
-  //   mockShip.hit();
-  //   expect(mockShip.hit).toHaveBeenCalled();
-  // });
+  it('is a function', () => {
+    expect(typeof mockShip).toBe('function');
+  });
 
-  // it('Checks if Ships is an object', () => {
-  //   expect(typeof mockShip).toBe('object');
-  // });
+  it('hit takes a number and hitCoords has length', () => {
+    const newShip = mockShip(3);
+    newShip.hit(3);
+    newShip.hit(1);
+    newShip.hit(2);
+    expect(newShip.hitCoords.length).toBe(3);
+  });
 
-  it('isSunk() returns true if the ship hits are equal to the ship length', () => {
-    // dependency.hit = jest.fn();
-    // const ship = mockShip(4).isSunk();
-    // ship.hit();
-    // mockShip(4).isSunk();
+
+  it('hitCoords has length', () => {
+    const arr = [[2], [3], [4], [5]];
     const testShip = mockShip(4);
-    // testShip.hit(3);
-    expect(testShip.isSunk()).toBe(true);
-    // expect(mockShip(4).isSunk()).toBe(true);
+    testShip.hitCoords = new Array(...arr);
+    expect(testShip.hitCoords.length).toBe(4);
+  });
+
+
+  it('hits are equal to the ship length', () => {
+    const newShip = mockShip(4);
+    newShip.hit(3);
+    newShip.hit(1);
+    newShip.hit(2);
+    newShip.hit(9);
+    const newSize = newShip.hitCoords.length;
+    const ship = mockShip(4);
+    expect(ship.size).toEqual(newSize);
+  });
+
+  it('large ship is sunk', () => {
+    const largeShip = mockShip(5);
+    largeShip.hit(0);
+    largeShip.hit(2);
+    largeShip.hit(9);
+    largeShip.hit(6);
+    largeShip.hit(3);
+    expect(largeShip.isSunk()).toBe(true);
+  });
+
+  it('partially hit should not sink', () => {
+    const newShip = mockShip(4);
+    newShip.hit(1);
+    newShip.hit(3);
+    expect(newShip.isSunk()).toBe(false);
   });
 });
-
-
-// jest.mock('../src/ships.js', () => ({
-//   createShip: jest.fn(),
-//   hit: jest.fn(),
-//   isSunk: jest.fn(),
-// }));
-
-// jest.mock('../src/user.js', () => ({
-//   user: jest.fn(),
-// }));
-
-// const mockShip = require('../src/ships');
-
-// describe('ships', () => {
-//   it('Checks if createShip has been called', () => {
-//     mockShip.createShip();
-//     expect(mockShip.createShip).toHaveBeenCalled();
-//   });
-
-//   it ('Checks if hit has been called', () => {
-//     mockShip.hit();
-//     expect(mockShip.hit).toHaveBeenCalled();
-//   });
-
-//   it ('Checks if isSunk has been called', () => {
-//     mockShip.isSunk();
-//     expect(mockShip.isSunk).toHaveBeenCalled();
-//   });
-
-//   it ('Checks if Ships is an object', () => {
-//     expect(typeof mockShip).toBe('object');
-//   });
-// });
