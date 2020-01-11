@@ -24,7 +24,7 @@ describe('Ship', () => {
   });
 
 
-  it('hits are equal to the ship length', () => {
+  it('hits is equal to the ship length', () => {
     const newShip = mockShip(4);
     newShip.hit(3);
     newShip.hit(1);
