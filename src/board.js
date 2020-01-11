@@ -107,6 +107,8 @@ const Board = (userShips) => {
 
   return {
     setupBoard,
+    randomBoolean,
+    getRandomPosition,
   };
 };
 
