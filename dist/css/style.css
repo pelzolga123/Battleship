@@ -1,44 +1,33 @@
 body {
-	/* margin: 60px auto; */
-	/* width: 70%; */
-	/* max-width: 950px; */
-	box-sizing: border-box;
-}
-
-h1 {
-	font-size: 3em;
-	font-family:'Helvetica', 'Arial', 'Sans-Serif';
-}
-
-p, button, input {
-	font-size: 1.5em;
-	line-height: 1.4em;
-	color: #333;
-	margin-bottom:1em;
-}
-
-body {
-	/* margin: 60px auto; */
-	/* width: 70%; */
-	/* max-width: 950px; */
-	box-sizing: border-box;
-}
-
-h1 {
-	font-size: 3em;
-	font-family:'Helvetica', 'Arial', 'Sans-Serif';
-}
-
-p, button, input {
-	font-size: 1.5em;
-	line-height: 1.4em;
-	color: #333;
-	margin-bottom:1em;
-}
-
-body {
 	margin: 25px 75px;
+	box-sizing: border-box;
 }
+
+h1 {
+	font-size: 3em;
+	font-family:'Helvetica', 'Arial', 'Sans-Serif';
+}
+
+p, button, input {
+	font-size: 1.5em;
+	line-height: 1.4em;
+	color: #333;
+	margin-bottom:1em;
+}
+
+h1 {
+	font-size: 3em;
+	font-family:'Helvetica', 'Arial', 'Sans-Serif';
+	text-align: center;
+}
+
+p, button, input {
+	font-size: 1.5em;
+	line-height: 1.4em;
+	color: #333;
+	margin-bottom:1em;
+}
+
 #battleship {
 	font-family: Arial, sans-serif;
 }
@@ -61,12 +50,7 @@ td {
 	color: #888;
 }
 
-.ship {
-	/* background-color: #CCC; */
-}
-
 .miss {
-	/* background-color: #6CF; */
 	background-color: blue;
 }
 

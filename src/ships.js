@@ -1,11 +1,11 @@
 const Ship = (size) => {
-  const hitCoords = [];
+  const hitCoords = new Set();
 
   const hit = (coords) => {
-    hitCoords.push(coords);
+    hitCoords.add(coords);
   };
 
-  const isSunk = () => hitCoords.length;
+  const isSunk = () => hitCoords.size;
 
   return {
     size,

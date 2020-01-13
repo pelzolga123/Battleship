@@ -4,7 +4,8 @@ import Board from './board';
 
 let hitsCount = 0;
 let turn = 'comp';
-const getShips = Ship();
+const getUserShips = Ship();
+const getCompShips = Ship();
 
 const compShips = [
   Ship(5),
@@ -21,19 +22,6 @@ const userShips = [
   Ship(3),
   Ship(2),
 ];
-/*
-const allShipsSunk = () => {
-  let count = 0;
-  compShips.forEach((ship) => {
-    if (ship.isSunk() === true) {
-      count += 1;
-    }
-  });
-
-  if (count === 5) {
-    return true;
-  } return false;
-};*/
 
 function getRandomPosition() {
   const x = Math.floor(Math.random() * 10);
@@ -97,7 +85,7 @@ function computerHit() {
   if (getCell === 'ship') {
     computerShoot(matrix);
     hitsCount += 1;
-    getShips.hit(matrix);
+    getUserShips.hit(matrix);
   } else {
     computerMiss(matrix);
   }
@@ -112,6 +100,27 @@ const getTurn = () => {
   }
   return turn;
 };
+
+function addEvent() {
+  const table = document.getElementById('board');
+  for (let i = 0; i < table.rows.length; i += 1) {
+    for (let j = 0; j < table.rows[i].cells.length; j += 1) {
+      const cell = table.rows[i].cells[j];
+      cell.setAttribute('class', `c-${i}${j}`);
+    }
+  }
+
+  document.querySelectorAll('#board td').forEach((td) => {
+    td.addEventListener('click', (e) => {
+      if (e.target && e.target.id === 'ship') {
+        getCompShips.hit(e.target.classList[0]);
+        e.target.style.background = 'red';
+      } else {
+        e.target.style.background = 'blue';
+      }
+    });
+  });
+}
 
 const fight = () => {
   const winner = document.getElementById('winner-h1');
@@ -132,6 +141,13 @@ const fight = () => {
   }
 };
 
+const freeze = () => {
+  const board = document.getElementById('board');
+  const playerBoard = document.getElementById('playerBoard');
+  board.classList.add('freeze');
+  playerBoard.classList.add('freeze');
+};
+
 function initialize() {
   Board(userShips).setupBoard('board');
   Board(compShips).setupBoard('playerBoard');
@@ -139,33 +155,21 @@ function initialize() {
   document.getElementById('volley').addEventListener('click', () => {
     document.getElementById('playField').setAttribute('class', 'visible');
     document.getElementById('volley').setAttribute('class', 'boards');
+    const winner = document.getElementById('winner-h1');
     const receiveAttack = setInterval(() => {
       fight();
-      if (getShips.isSunk() === 17) {
+      if (getUserShips.isSunk() === 17 && getCompShips.isSunk() < 17) {
         clearInterval(receiveAttack);
-        const board = document.getElementById('board');
-        const playerBoard = document.getElementById('playerBoard');
-        const winner = document.getElementById('winner-h1');
-        board.classList.add('freeze');
-        playerBoard.classList.add('freeze');
+        freeze();
         winner.innerHTML = 'Computer wins!!!';
       }
-    }, 1000);
+      if (getUserShips.isSunk() < 17 && getCompShips.isSunk() === 17) { 
+        clearInterval(receiveAttack);
+        freeze();
+        winner.innerHTML = 'User wins!!!';
+      }
+    }, 3000);
   });
 }
 
 initialize();
-
-function addEvent() {
-  let tmp;
-
-  document.querySelectorAll('#board td').forEach((e) => e.addEventListener('click', (n) => {
-    if (n.target && n.target.id === 'ship') {
-      n.target.style.background = 'red';
-    } else {
-      n.target.style.background = 'blue';
-    }
-    tmp = true;
-  }));
-  return tmp;
-}

@@ -55,7 +55,7 @@ describe('Ship', () => {
   it('was hit() once', () => {
     const newShip = mockShip(4);
     newShip.hit(1);
-    expect(newShip.hitCoords.length).toBe(1);
+    expect(newShip.hitCoords.size).toBe(1);
   });
 
   it('was hit() five times', () => {
@@ -65,6 +65,6 @@ describe('Ship', () => {
     newShip.hit(3);
     newShip.hit(4);
     newShip.hit(5);
-    expect(newShip.hitCoords.length).toBe(5);
+    expect(newShip.hitCoords.size).toBe(5);
   });
 });
