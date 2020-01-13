@@ -79,10 +79,6 @@ td {
 #playerBoard #ship {
 	background-color: steelblue;
 }
-.boards{
-	display: flex;
-    justify-content: space-around;
-}
 #winner{
 	text-align: center;
 }
@@ -95,4 +91,11 @@ td {
 .freeze{
 	pointer-events: none;
 	opacity: 0.5;
+}
+.boards{
+	display: none;
+}
+.visible{
+	display: flex;
+	justify-content: space-around;
 }

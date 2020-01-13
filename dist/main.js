@@ -97,15 +97,9 @@ const Ship = (size) => {
 
   const hit = (coords) => {
     hitCoords.push(coords);
-    /* const hitSpot = document.getElementById(coords);
-    hitSpot.setAttribute('class', 'hit'); */
   };
 
-  const isSunk = () => {
-    if (size === hitCoords.length) {
-      return true;
-    } return false;
-  };
+  const isSunk = () => hitCoords.length;
 
   return {
     size,
@@ -123,7 +117,7 @@ const Board = (userShips) => {
   const positions = [];
   const HIT = 2;
   const SHIP = 0;
-  const probabilities = [];
+  const grid = [];
 
   const getRandomPosition = () => {
     const x = Math.floor(Math.random() * 10);
@@ -184,9 +178,9 @@ const Board = (userShips) => {
   const generate = () => {
     const hits = [];
     for (let y = 0; y < boardSize; y += 1) {
-      probabilities[y] = [];
+      grid[y] = [];
       for (let x = 0; x < boardSize; x += 1) {
-        probabilities[y][x] = 0;
+        grid[y][x] = 0;
         if (positions[x][y] === HIT) {
           hits.push([x, y]);
         }
@@ -226,6 +220,8 @@ const Board = (userShips) => {
 
   return {
     setupBoard,
+    randomBoolean,
+    getRandomPosition,
   };
 };
 
@@ -237,10 +233,9 @@ const Board = (userShips) => {
 
 
 
-const hitsCount = 0;
+let hitsCount = 0;
 let turn = 'comp';
-
-// let volleyButton;
+const getShips = ships();
 
 const compShips = [
   ships(5),
@@ -257,7 +252,7 @@ const userShips = [
   ships(3),
   ships(2),
 ];
-
+/*
 const allShipsSunk = () => {
   let count = 0;
   compShips.forEach((ship) => {
@@ -269,7 +264,7 @@ const allShipsSunk = () => {
   if (count === 5) {
     return true;
   } return false;
-};
+};*/
 
 function getRandomPosition() {
   const x = Math.floor(Math.random() * 10);
@@ -332,7 +327,8 @@ function computerHit() {
   const getCell = getPlayerCells(matrix);
   if (getCell === 'ship') {
     computerShoot(matrix);
-    // hitsCount += 1;
+    hitsCount += 1;
+    getShips.hit(matrix);
   } else {
     computerMiss(matrix);
   }
@@ -358,14 +354,12 @@ const fight = () => {
     board.classList.add('freeze');
     winner.innerHTML = 'computer`s turn';
     computerHit();
-    console.log('comp', hitsCount);
   }
   if (turns === 'user') {
     playerBoard.classList.add('freeze');
     board.classList.remove('freeze');
     winner.innerHTML = ' user`s turn';
     addEvent();
-    console.log('user');
   }
 };
 
@@ -373,12 +367,22 @@ function initialize() {
   board(userShips).setupBoard('board');
   board(compShips).setupBoard('playerBoard');
 
-  const f = setInterval(() => {
-    fight();
-    if (computerHit() === 17) {
-      clearInterval(f);
-    }
-  }, 5000);
+  document.getElementById('volley').addEventListener('click', () => {
+    document.getElementById('playField').setAttribute('class', 'visible');
+    document.getElementById('volley').setAttribute('class', 'boards');
+    const receiveAttack = setInterval(() => {
+      fight();
+      if (getShips.isSunk() === 17) {
+        clearInterval(receiveAttack);
+        const board = document.getElementById('board');
+        const playerBoard = document.getElementById('playerBoard');
+        const winner = document.getElementById('winner-h1');
+        board.classList.add('freeze');
+        playerBoard.classList.add('freeze');
+        winner.innerHTML = 'Computer wins!!!';
+      }
+    }, 1000);
+  });
 }
 
 initialize();

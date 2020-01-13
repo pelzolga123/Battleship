@@ -2,10 +2,9 @@
 import Ship from './ships';
 import Board from './board';
 
-const hitsCount = 0;
+let hitsCount = 0;
 let turn = 'comp';
-
-// let volleyButton;
+const getShips = Ship();
 
 const compShips = [
   Ship(5),
@@ -22,7 +21,7 @@ const userShips = [
   Ship(3),
   Ship(2),
 ];
-
+/*
 const allShipsSunk = () => {
   let count = 0;
   compShips.forEach((ship) => {
@@ -34,7 +33,7 @@ const allShipsSunk = () => {
   if (count === 5) {
     return true;
   } return false;
-};
+};*/
 
 function getRandomPosition() {
   const x = Math.floor(Math.random() * 10);
@@ -97,7 +96,8 @@ function computerHit() {
   const getCell = getPlayerCells(matrix);
   if (getCell === 'ship') {
     computerShoot(matrix);
-    // hitsCount += 1;
+    hitsCount += 1;
+    getShips.hit(matrix);
   } else {
     computerMiss(matrix);
   }
@@ -123,14 +123,12 @@ const fight = () => {
     board.classList.add('freeze');
     winner.innerHTML = 'computer`s turn';
     computerHit();
-    console.log('comp', hitsCount);
   }
   if (turns === 'user') {
     playerBoard.classList.add('freeze');
     board.classList.remove('freeze');
     winner.innerHTML = ' user`s turn';
     addEvent();
-    console.log('user');
   }
 };
 
@@ -138,12 +136,22 @@ function initialize() {
   Board(userShips).setupBoard('board');
   Board(compShips).setupBoard('playerBoard');
 
-  const f = setInterval(() => {
-    fight();
-    if (computerHit() === 17) {
-      clearInterval(f);
-    }
-  }, 5000);
+  document.getElementById('volley').addEventListener('click', () => {
+    document.getElementById('playField').setAttribute('class', 'visible');
+    document.getElementById('volley').setAttribute('class', 'boards');
+    const receiveAttack = setInterval(() => {
+      fight();
+      if (getShips.isSunk() === 17) {
+        clearInterval(receiveAttack);
+        const board = document.getElementById('board');
+        const playerBoard = document.getElementById('playerBoard');
+        const winner = document.getElementById('winner-h1');
+        board.classList.add('freeze');
+        playerBoard.classList.add('freeze');
+        winner.innerHTML = 'Computer wins!!!';
+      }
+    }, 1000);
+  });
 }
 
 initialize();
