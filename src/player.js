@@ -1,2 +1,2 @@
-const player = (playerName) => playerName;
+const player = playerName => playerName;
 export default player;

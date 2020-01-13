@@ -399,7 +399,7 @@ function initialize() {
         freeze();
         winner.innerHTML = 'User wins!!!';
       }
-    }, 3000);
+    }, 1500);
   });
 }
 

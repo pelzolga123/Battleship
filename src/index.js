@@ -168,7 +168,7 @@ function initialize() {
         freeze();
         winner.innerHTML = 'User wins!!!';
       }
-    }, 2000);
+    }, 1500);
   });
 }
 
