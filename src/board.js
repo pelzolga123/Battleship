@@ -20,10 +20,8 @@ const Board = (userShips) => {
     const z = (vertical ? y : x);
     const end = z + shipSize - 1;
 
-    // board border is too close
     if (end > boardSize - 1) return false;
 
-    // check if there's an obstacle
     for (let i = z; i <= end; i += 1) {
       const thisPos = (vertical ? positions[x][i] : positions[i][y]);
       if (thisPos === bool) return false;
@@ -33,7 +31,6 @@ const Board = (userShips) => {
   };
 
   const placeShip = (pos, shipSize, vertical) => {
-    // "pos" is ship origin
     const x = pos[0];
     const y = pos[1];
     const z = (vertical ? y : x);
@@ -93,7 +90,6 @@ const Board = (userShips) => {
   };
 
   const setupBoard = (boardName) => {
-    // initialize positions matrix
     for (let y = 0; y < boardSize; y += 1) {
       positions[y] = [];
       for (let x = 0; x < boardSize; x += 1) {

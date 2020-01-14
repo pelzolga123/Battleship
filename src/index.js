@@ -163,12 +163,12 @@ function initialize() {
         freeze();
         winner.innerHTML = 'Computer wins!!!';
       }
-      if (getUserShips.isSunk() < 17 && getCompShips.isSunk() === 17) { 
+      if (getUserShips.isSunk() < 17 && getCompShips.isSunk() === 17) {
         clearInterval(receiveAttack);
         freeze();
         winner.innerHTML = 'User wins!!!';
       }
-    }, 1500);
+    }, 2500);
   });
 }
 
