@@ -1,0 +1,94 @@
+body {
+	margin: 25px 75px;
+	box-sizing: border-box;
+}
+
+h1 {
+	font-size: 3em;
+	font-family:'Helvetica', 'Arial', 'Sans-Serif';
+}
+
+p, button, input {
+	font-size: 1.5em;
+	line-height: 1.4em;
+	color: #333;
+	margin-bottom:1em;
+}
+
+h1 {
+	font-size: 3em;
+	font-family:'Helvetica', 'Arial', 'Sans-Serif';
+	text-align: center;
+}
+
+p, button, input {
+	font-size: 1.5em;
+	line-height: 1.4em;
+	color: #333;
+	margin-bottom:1em;
+}
+
+#battleship {
+	font-family: Arial, sans-serif;
+}
+#volley {
+	padding: 6px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 200px;
+    font-size: 36px;
+    color: #fff;
+    background-color: blue;
+    border-radius: 20px;
+    border: 1px solid #fff;
+}
+#result {
+	margin-left: 20px;
+	font-size: 12px;
+}
+#board {
+	margin-top: 25px;
+}
+td {
+	width: 32px;
+	height: 32px;
+	font-size: 11px;
+	text-align: center;
+	border: 1px solid black;
+	color: #888;
+}
+
+.miss {
+	background-color: blue;
+}
+
+.hit {
+	background-color: #F00;
+}
+#playerBoard{
+	margin-top: 25px;
+}
+#playerBoard #ship {
+	background-color: steelblue;
+}
+#winner{
+	text-align: center;
+}
+.red{
+	background-color: crimson!important;
+}
+.green{
+	background-color: green!important;
+}
+.freeze{
+	pointer-events: none;
+	opacity: 0.5;
+}
+.boards{
+	display: none!important;
+}
+.visible{
+	display: flex;
+	justify-content: space-around;
+}

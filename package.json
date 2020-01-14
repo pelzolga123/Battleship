@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Classic Battleship game",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "build": "webpack -w",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -24,14 +26,18 @@
   },
   "homepage": "https://github.com/pelzolga123/Battleship#readme",
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-loader": "^8.0.6",
     "cli": "^1.0.1",
+    "jest": "^24.9.0",
+    "terser-webpack-plugin": "^2.3.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "jest": "^24.9.0"
+    "eslint-plugin-import": "^2.18.2"
   }
 }
