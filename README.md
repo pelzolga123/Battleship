@@ -18,6 +18,22 @@ game was built in ES6 using test driven development with [Jest](https://jestjs.i
 * [webpack](https://webpack.js.org/)
 * [Jest](https://jestjs.io/)
 
+### Development
+* Install dependencies
+```sh
+npm install
+```
+* Run Script
+```sh
+npm run build
+```
+
+### Testing project
+* Run tests
+
+```sh
+npm run test
+```
 
 ## Authors
 
