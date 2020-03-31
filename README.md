@@ -7,10 +7,10 @@
 ## About The Project
 
 The [battleship](https://en.wikipedia.org/wiki/Battleship_(game)) project is the
-final project in Microverse Javascript module. It is expected that students now
+final project in the Microverse Javascript module. It is expected that students now
 have a full grasp of javascript concepts like Object Oriented Programming, Objects, Constructors, Factory
 Functions, The Module Pattern, ES6 Notation, Webpack and Testing with Jest. The
-game was built in ES6 using test driven development with [Jest](https://jestjs.io/).
+game was built in ES6 using test-driven development with [Jest](https://jestjs.io/).
 
 
 ### Built With
